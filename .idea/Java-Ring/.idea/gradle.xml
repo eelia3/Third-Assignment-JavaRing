@@ -5,12 +5,11 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/Java-Ring" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../../../Java/#Gradle-8.6-all/gradle-8.6" />
-        <option name="gradleJvm" value="21" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-8.12" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/Java-Ring" />
+            <option value="$PROJECT_DIR$" />
           </set>
         </option>
       </GradleProjectSettings>
