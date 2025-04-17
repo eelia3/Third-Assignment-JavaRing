@@ -39,4 +39,6 @@ public abstract class Armor {
     public boolean isBroke() {
         return isBroke;
     }
+
+    //public int speshial_power(){};
 }

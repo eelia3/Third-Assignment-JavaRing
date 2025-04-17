@@ -16,7 +16,7 @@ public abstract class Weapon {
         this.manaCost = manaCost;
     }
 
-    @Override
+    //@Override
     public void use(Entity target) {
         target.takeDamage(damage);
     }

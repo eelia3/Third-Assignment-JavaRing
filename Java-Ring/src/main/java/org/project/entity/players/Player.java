@@ -1,45 +1,76 @@
 package org.project.entity.players;
 
 import org.project.entity.Entity;
+import org.project.entity.enemies.Enemy;
 import org.project.object.armors.Armor;
 import org.project.object.weapons.Weapon;
+import org.project.object.consumables.Flask;
 
 // TODO: UPDATE IMPLEMENTATION
 public abstract class Player {
-    protected String name;
+    public String name;
     Weapon weapon;
+
     Armor armor;
     private int hp;
     private int maxHP;
+    Flask flasks;
     private int mp;
     private int maxMP;
+    private boolean isDefending;
 
-    public Player(String name, int hp, int mp, Weapon weapon, Armor armor) {
+    public Player(String name, int hp, int mp, Weapon weapon, Armor armor, Flask flasks, int mhp, int mmp) {
         this.name = name;
         this.hp = hp;
         this.mp = mp;
-
+        this.maxHP = mhp;
+        this.maxMP = mmp;
         this.weapon = weapon;
         this.armor = armor;
+        this.isDefending = false;
     }
 
-    @Override
+    //@Override
     public void attack(Entity target) {
         target.takeDamage(weapon.getDamage());
     }
 
-    @Override
+    //@Override
     public void defend() {
-        // TODO: (BONUS) IMPLEMENT A DEFENSE METHOD FOR SHIELDS
+        this.isDefending = true;
+    }
+
+    public void stopDefending() {
+        this.isDefending = false;
+    }
+
+    public boolean isDefending() {
+        return isDefending;
+    }
+
+    public void flaskheal() {
+        this.hp += flasks.hflask();
+        if (this.hp > maxHP) {
+            this.hp = maxHP;
+        }
+    }
+
+    public void flaskmp() {
+        this.mp += flasks.mflask();
+        if (this.hp > maxHP) {
+            this.mp = maxMP;
+        }
     }
 
     // TODO: (BONUS) UPDATE THE FORMULA OF TAKING DAMAGE
-    @Override
+    //@Override
     public void takeDamage(int damage) {
-        hp -= damage - armor.getDefense();
+        if (!isDefending) {
+            hp -= damage * (1 - (armor.getDefense() / (armor.getDefense() + 50.0)));
+        }
     }
 
-    @Override
+    //@Override
     public void heal(int health) {
         hp += health;
         if (hp > maxHP) {
@@ -47,13 +78,11 @@ public abstract class Player {
         }
     }
 
-    @Override
-    public void fillMana(int mana) {
-        mp += mana;
-        if (mp > maxMP) {
-            mp = maxMP;
-        }
+    public void hp(int directdamage) {
+        this.hp -= directdamage;
     }
+
+    //@Override
 
 
     public String getName() {
@@ -64,7 +93,7 @@ public abstract class Player {
         return hp;
     }
 
-    @Override
+    //@Override
     public int getMaxHP() {
         return maxHP;
     }
@@ -73,7 +102,7 @@ public abstract class Player {
         return mp;
     }
 
-    @Override
+    //@Override
     public int getMaxMP() {
         return maxMP;
     }
@@ -82,8 +111,12 @@ public abstract class Player {
         return weapon;
     }
 
-    public Armor getArmor() {
-        return armor;
-    }
+    public int getArmor() {
+        return armor.getDefense();
 
+    }
+public void setMp(int MP){
+        mp -=MP;
+}
+    public void oldTrickInTheBook(Enemy enemy) {};
 }

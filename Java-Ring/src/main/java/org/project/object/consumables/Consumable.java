@@ -2,7 +2,9 @@ package org.project.object.consumables;
 
 // TODO: UPDATE IMPLEMENTATION
 public abstract class Consumable {
-    /*
-    TODO: ADD OTHER REQUIRED AND BONUS METHODS
-    */
+    protected String name;
+    Consumable(String name)
+    {
+        this.name = name;
+    }
 }

@@ -1,24 +1,38 @@
 package org.project.entity.enemies;
 
+import org.project.entity.players.Player;
 import org.project.object.weapons.Weapon;
 
-// TODO: UPDATE IMPLEMENTATION
 public abstract class Enemy {
     Weapon weapon;
     private int hp;
+    public String name;
     private int mp;
+    private boolean isDefending;
 
-    public Enemy(int hp, int mp, Weapon weapon) {
+    public Enemy(int hp, int mp, Weapon weapon,String name) {
+        this.name = name;
         this.hp = hp;
         this.mp = mp;
-
         this.weapon = weapon;
+        this.isDefending = false;
     }
 
-    // TODO: (BONUS) UPDATE THE FORMULA OF TAKING DAMAGE
-    @Override
+    public void defend() {
+        this.isDefending = true;
+    }
+public void setHp(int HP){
+        this.hp = HP;
+}
+    public void stopDefending() {
+        this.isDefending = false;
+    }
+
     public void takeDamage(int damage) {
-        hp -= damage;
+        if (!isDefending) {
+            hp -= damage;
+            if (hp < 0) hp = 0;
+        }
     }
 
     public int getHp() {
@@ -31,5 +45,16 @@ public abstract class Enemy {
 
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    public boolean isDefending() {
+        return isDefending;
+    }
+
+    public void speshialmove(Player player) {
+    }
+
+    public void setMp(int mpcost) {
+        this.mp -= mpcost;
     }
 }
